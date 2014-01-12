@@ -1,13 +1,14 @@
+<<<<<<< HEAD
 ;******************************************************************************************
 ;******************************************************************************************
 ;*************Programa de control el Reductor Electronico de Energia Electrica*************
 ;**********----------------------------------------------------------------------**********
-;****************************Diseñado por: Ing. Julian Abramson****************************
+;****************************DiseÃ±ado por: Ing. Julian Abramson****************************
 ;****CDE L1(), va definida por el pinC.0; su salida correspondiente L1(out), por pinC.1****
 ;****CDE L2(), va definida por el pinC.2; su salida correspondiente L2(out), por pinB.4****
 ;******Las salidas de control, QR1 por el pinB.5, y QR2 por el pinB.3 respectivamente******
 ;*******Los swithes de reset SW_1, por el pinC.3 y SW_2 por el pinB.2 respectivamente******
-;************Programa diseñado para el PICAXE 14M2, el 07 de Diciembre del 2013************
+;************Programa diseÃ±ado para el PICAXE 14M2, el 07 de Diciembre del 2013************
 
 #simtask1							; Define la task (0, 1, 2 o 3) a simular
 #picaxe 14m2						; setea el tipo de PICAXE a usar	
@@ -16,8 +17,8 @@
 	symbol SW_2 = pinB.2				; Define una entrada tipo switch
 	symbol Qr1 = B.5					; Define el pin de salida de potencia
 	symbol Qr2 = B.3					;		"          "
-	symbol LED_1 = B.0 				; Define la salida ‘LED_1’ en el pin B.0
-	symbol LED_2 = B.1 				; Define la salida ‘LED_2’ en el pin B.1
+	symbol LED_1 = B.0 				; Define la salida â€˜LED_1â€™ en el pin B.0
+	symbol LED_2 = B.1 				; Define la salida â€˜LED_2â€™ en el pin B.1
 	
 
 start0:
@@ -32,7 +33,7 @@ start0:
 	
 tempo1:
 	
-	pause 100						; Pequeña pausa (bouncing)
+	pause 100						; PequeÃ±a pausa (bouncing)
 	resume 2
 	high B.0
 	let b2 = 0						; Varibe sincroniza salidas 2 y 1
@@ -68,7 +69,7 @@ tempo2:
 	
 supresion:
 	
-	pause 100						; pequeña pausa (bouncing)
+	pause 100						; pequeÃ±a pausa (bouncing)
 	low Qr1						; Apaga la potencia de salida Linea 1
 	let b2 = 1
 	if pinC.0 = 0 then start0
@@ -92,7 +93,7 @@ start1:
 	
 tempo3:
 	
-	pause 100						; Pequeña pausa (bouncing)
+	pause 100						; PequeÃ±a pausa (bouncing)
 	resume 3
 	high B.1
 	let b7 = 0						; Variable sincroniza salidas 1 y 2
@@ -105,6 +106,12 @@ tempo3:
 normal_1:
 
 	suspend 3
+	#rem
+	inc b10
+	if b10 > 250 then
+	goto temp_0
+	end if
+	#endrem
 	low B.1
 	if b2 = 1 then supresion_1
 	high Qr2						; Activa la potencia de salida Linea 2
@@ -126,7 +133,7 @@ tempo4:
 	
 supresion_1:
 
-	pause 100						; Pequeña pausa (bouncing)
+	pause 100						; PequeÃ±a pausa (bouncing)
 	low Qr2						; Apaga la potencia de salida Linea 2
 	let b7 = 1
 	if pinC.2 = 0 then start1
@@ -176,3 +183,29 @@ entradas:
 	high B.0
 	high B.1
 	goto interrupt
+
+
+#rem
+temp_0:
+
+	readtemp C.4,b9					; Lee el sensor de temp (DS18B20), y lo
+								; almacena en la variable b9
+	if b9 < 30 then					; Setea la temperatura inferior del Fan
+	goto temp_2
+	elseif b9 > 50 then					; Setea la temperatura superior del Fan
+	goto temp_1
+	end if		
+	
+temp_1:
+	
+	high B.0						; Esta salida esta ocupada por Led_1
+	let b10 = 0						; Activa la salida del Fan
+	goto normal_1
+
+temp_2:
+
+	low B.0						Esta salida esta ocupada por Led_1
+	let b10 = 0						; Desactiva la salida del Fan
+	goto normal_1
+#endrem
+>>>>>>> RED/master

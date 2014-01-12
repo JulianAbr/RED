@@ -1,14 +1,15 @@
+<<<<<<< HEAD
 ;******************************************************************************************
 ;******************************************************************************************
 ;*************Programa de control el Reductor Electronico de Energia Electrica*************
 ;**********----------------------------------------------------------------------**********
-;****************************Diseñado por: Ing. Julian Abramson****************************
+;****************************DiseÃ±ado por: Ing. Julian Abramson****************************
 ;****CDE L1(), va definida por el pinC.0; su salida correspondiente L1(out), por pinC.1****
 ;****CDE L2(), va definida por el pinC.2; su salida correspondiente L2(out), por pinC.7****
 ;******Las salidas de control, QR1 por el pinB.5, y QR2 por el pinB.4 respectivamente******
 ;******Los switches de reset SW_1, por el pinB.2 y SW_2 por el pinB.3 respectivamente******
 ;********Los pines de salida para el Fan y la bocina son B.7 y B.6 respectivamente*********
-;************Programa diseñado para el PICAXE 18M2, el 07 de Diciembre del 2013************
+;************Programa diseÃ±ado para el PICAXE 18M2, el 07 de Diciembre del 2013************
 
 
 #rem
@@ -55,8 +56,8 @@
 	symbol SW_2 = pinB.3				; Define una entrada tipo switch
 	symbol Qr1 = B.5					; Define el pin de salida de potencia
 	symbol Qr2 = B.4					;		"          "
-	symbol LED_1 = B.0 				; Define la salida ‘LED_1’ en el pin B.0
-	symbol LED_2 = B.1 				; Define la salida ‘LED_2’ en el pin B.1
+	symbol LED_1 = B.0 				; Define la salida â€˜LED_1â€™ en el pin B.0
+	symbol LED_2 = B.1 				; Define la salida â€˜LED_2â€™ en el pin B.1
 	
 
 start0:
@@ -71,7 +72,7 @@ start0:
 	
 tempo1:
 	
-	pause 100						; Pequeña pausa (bouncing)
+	pause 100						; PequeÃ±a pausa (bouncing)
 	resume 2
 	high B.0
 	let b2 = 0						; Varibe sincroniza salidas 2 y 1
@@ -100,11 +101,13 @@ tempo2:
 		pause 100
 		if pinC.1 = 1 then normal
 	next b3
+	;suspend 2						; Comentar estas lineas, para saber 
+	;low B.0						; cual de las dos salidas fallo   
 	goto supresion	
 	
 supresion:
 	
-	pause 100						; pequeña pausa (bouncing)
+	pause 100						; pequeÃ±a pausa (bouncing)
 	low Qr1						; Apaga la potencia de salida Linea 1
 	let b2 = 1
 	if pinC.0 = 0 then start0
@@ -129,7 +132,7 @@ start1:
 	
 tempo3:
 	
-	pause 100						; Pequeña pausa (bouncing)
+	pause 100						; PequeÃ±a pausa (bouncing)
 	resume 3
 	high B.1
 	let b7 = 0						; Variable sincroniza salidas 1 y 2
@@ -164,11 +167,13 @@ tempo4:
 		pause 100
 		if pinC.7 = 1 then normal_1
 	next b6
+	;suspend 3						; Comentar estas lineas, para saber
+	;low B.1						; cual de las dos salidas fallo
 	goto supresion_1	
 	
 supresion_1:
 
-	pause 100						; Pequeña pausa (bouncing)
+	pause 100						; PequeÃ±a pausa (bouncing)
 	low Qr2						; Apaga la potencia de salida Linea 2
 	let b7 = 1
 	if pinC.2 = 0 then start1
@@ -272,3 +277,4 @@ Main:						'PWM CORREGIR LOS PINES B.3 y B.6
 
 goto main 
 #endrem
+>>>>>>> RED/master

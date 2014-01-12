@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ;******************************************************************************************
 ;******************************************************************************************
 ;*************Programa de control el Reductor Electronico de Energia Electrica*************
@@ -146,5 +147,6 @@ start3:
 	pause 50 						; Espera de 0.25 sec.
 	low LED_2 						; LED_1 off
 	pause 50 						; Espera de 0.25 sec.
-	goto start3		 			
-
+	goto start3
+	 			
+>>>>>>> RED/master
