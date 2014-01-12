@@ -106,12 +106,6 @@ tempo3:
 normal_1:
 
 	suspend 3
-	#rem
-	inc b10
-	if b10 > 250 then
-	goto temp_0
-	end if
-	#endrem
 	low B.1
 	if b2 = 1 then supresion_1
 	high Qr2						; Activa la potencia de salida Linea 2
@@ -183,29 +177,4 @@ entradas:
 	high B.0
 	high B.1
 	goto interrupt
-
-
-#rem
-temp_0:
-
-	readtemp C.4,b9					; Lee el sensor de temp (DS18B20), y lo
-								; almacena en la variable b9
-	if b9 < 30 then					; Setea la temperatura inferior del Fan
-	goto temp_2
-	elseif b9 > 50 then					; Setea la temperatura superior del Fan
-	goto temp_1
-	end if		
-	
-temp_1:
-	
-	high B.0						; Esta salida esta ocupada por Led_1
-	let b10 = 0						; Activa la salida del Fan
-	goto normal_1
-
-temp_2:
-
-	low B.0						Esta salida esta ocupada por Led_1
-	let b10 = 0						; Desactiva la salida del Fan
-	goto normal_1
-#endrem
->>>>>>> RED/master
+>>>>>>> Reductor
