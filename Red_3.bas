@@ -100,8 +100,6 @@ tempo2:
 		pause 100
 		if pinC.1 = 1 then normal
 	next b3
-	;suspend 2						; Comentar estas lineas, para saber 
-	;low B.0						; cual de las dos salidas fallo   
 	goto supresion	
 	
 supresion:
@@ -166,8 +164,6 @@ tempo4:
 		pause 100
 		if pinC.7 = 1 then normal_1
 	next b6
-	;suspend 3						; Comentar estas lineas, para saber
-	;low B.1						; cual de las dos salidas fallo
 	goto supresion_1	
 	
 supresion_1:
@@ -257,22 +253,3 @@ sonido:
 	pause 2000
 	low B.6
 	return
-
-
-
-
-#rem
-Main:						'PWM CORREGIR LOS PINES B.3 y B.6
-
-	for b1= 0 to 255 step 2 	' counter loop so LED has multiple PWM cycles
-		pwm 2,b1,1 			' PWM pin 2 LED one cycle increasin pulse width
-		pwm 4,b1,1 			' PWM pin 4 LED one cycle increasing pulse width
-	next b1 				' effect is a pleasing surging brightne ss increase
-	
-	for b1= 255 to 0 step -2
-		pwm 2,b1,1 			' PWM pin 2 LED one cycle decreasing pulse width
-		pwm 4,b1,1 			' PWM pin 4 LED one cycle decreasing pulse width
-	next b1
-
-goto main 
-#endrem
